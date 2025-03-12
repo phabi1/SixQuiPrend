@@ -57,9 +57,16 @@ export class GameGateway {
       return this.createGameNotFoundResponse();
     }
 
+    let name = body.name;
+    if (!name) {
+      name = 'Player ' + Math.floor(Math.random() * 1000);
+    }
+
     const player = new Player();
-    player.setName(body.name);
+    player.setName(name);
     game.players.addPlayer(player);
+
+    await this.gameService.save(game);
 
     client.join(game.getId());
 
@@ -67,7 +74,9 @@ export class GameGateway {
 
     return {
       event: 'join',
-      data: game,
+      data: {
+        playerId: player.getId(),
+      },
     };
   }
 

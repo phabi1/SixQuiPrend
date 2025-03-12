@@ -20,7 +20,7 @@ export class Game implements Serializable {
   }
 
   getStatus() {
-    throw new Error('Method not implemented.');
+    return this.status;
   }
 
   getPlayers() {
@@ -71,8 +71,20 @@ export class Game implements Serializable {
 
   private generateCards() {
     const cards = [];
-    for (let i = 0; i < 115; i++) {
-      cards.push(new Card(i + 1, i));
+    for (let i = 1; i < 105; i++) {
+      let points = 1;
+      if (i === 55) {
+        points = 7;
+      } else if (i % 5 === 0) {
+        points = 2;
+      } else if (i % 10 === 0) {
+        points = 3;
+      } else if (i % 11 === 0) {
+        points = 5;
+      } else {
+        points = 1;
+      }
+      cards.push(new Card(i, points));
     }
     return cards;
   }

@@ -5,8 +5,12 @@ export class Players implements Serializable {
   private players: Player[] = [];
 
   addPlayer(player: Player) {
+    if (player.getId() === '') {
+      player.setId(this.generateUniqueId());
+    }
     this.players.push(player);
   }
+  
 
   removePlayer(player: Player) {
     this.players = this.players.filter((p) => p.getId() !== player.getId());
@@ -38,5 +42,9 @@ export class Players implements Serializable {
       player.unserialize(playerData);
       return player;
     });
+  }
+
+  private generateUniqueId(): string {
+    return Math.random().toString(36).substr(2, 9);
   }
 }

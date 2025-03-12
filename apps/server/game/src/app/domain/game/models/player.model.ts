@@ -18,7 +18,7 @@ export class Player implements Serializable {
   }
 
   setName(name: string) {
-    throw new Error('Method not implemented.');
+    this.name = name;
   }
 
   getPoints() {
@@ -32,11 +32,13 @@ export class Player implements Serializable {
   serialize() {
     return {
       id: this.id,
+      name: this.name,
       points: this.points,
     };
   }
   unserialize(data: any): void {
     this.id = data.id;
+    this.name = data.name;
     this.points = data.points;
   }
 }

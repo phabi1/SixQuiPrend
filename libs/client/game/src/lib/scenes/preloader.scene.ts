@@ -4,10 +4,11 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('logo', 'assets/logo.png');
+    this.load.image('logo', 'images/logo.jpg');
   }
 
   create() {
     this.add.image(400, 300, 'logo');
+    this.scene.start('join');
   }
 }
